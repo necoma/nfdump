@@ -1025,13 +1025,12 @@ master_record_t *r = (master_record_t *)record;
 	as[IP_STRING_LEN-1] = 0;
 	ds[IP_STRING_LEN-1] = 0;
 
-	when = r->first;
-	ts = localtime(&when);
-	strftime(datestr1, 63, "%Y-%m-%d %H:%M:%S", ts);
-
-	when = r->last;
-	ts = localtime(&when);
-	strftime(datestr2, 63, "%Y-%m-%d %H:%M:%S", ts);
+        /* hard-coded UNIX timestamp (hajime) */
+        when = r->first;
+        snprintf(datestr1, 63, "%lu", when);
+ 
+        when = r->last;
+        snprintf(datestr2, 63, "%lu", when);
 
 	duration = r->last - r->first;
 	duration += ((double)r->msec_last - (double)r->msec_first) / 1000.0;
