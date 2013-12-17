@@ -632,13 +632,12 @@ extension_map_t	*extension_map = r->map_ref;
 	as[IP_STRING_LEN-1] = 0;
 	ds[IP_STRING_LEN-1] = 0;
 
+        /* hard-coded UNIX timestamp (hajime) */
 	when = r->first;
-	ts = localtime(&when);
-	strftime(datestr1, 63, "%Y-%m-%d %H:%M:%S", ts);
+	snprintf(datestr1, 63, "%lu", r->first);
 
 	when = r->last;
-	ts = localtime(&when);
-	strftime(datestr2, 63, "%Y-%m-%d %H:%M:%S", ts);
+	snprintf(datestr2, 63, "%lu", r->last);
 
 	String_Flags(record, flags_str);
 
